@@ -1,11 +1,16 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "laravel/laravel-hexagonal-academy",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Learning Management System with Hexagonal Architecture, DDD, CQRS and Event Sourcing.",
     "keywords": [
         "laravel",
-        "framework"
+        "hexagonal-architecture",
+        "ddd",
+        "cqrs",
+        "event-sourcing",
+        "clean-architecture",
+        "lms"
     ],
     "license": "MIT",
     "require": {
@@ -26,7 +31,9 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Shared\\": "src/Shared/",
+            "BoundedContext\\": "src/BoundedContext/"
         }
     },
     "autoload-dev": {

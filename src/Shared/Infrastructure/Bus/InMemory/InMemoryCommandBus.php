@@ -28,7 +28,7 @@ final class InMemoryCommandBus implements CommandBusInterface
     {
         $commandClass = get_class($command);
 
-        if (!isset($this->handlers[$commandClass])) {
+        if (! isset($this->handlers[$commandClass])) {
             throw new \RuntimeException(
                 sprintf('No handler registered for command: %s', $commandClass)
             );

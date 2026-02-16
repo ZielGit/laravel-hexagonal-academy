@@ -15,12 +15,11 @@ abstract class Command implements CommandInterface
 {
     /**
      * Get command name for logging/debugging
-     *
-     * @return string
      */
     public function getCommandName(): string
     {
         $classParts = explode('\\', static::class);
+
         return end($classParts);
     }
 }

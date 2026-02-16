@@ -12,15 +12,12 @@ use Shared\Application\Bus\QueryInterface;
  * Laravel Query Bus Implementation
  *
  * Uses Laravel's native bus for query dispatching
- *
- * @package Shared\Infrastructure\Bus
  */
 final class LaravelQueryBus implements QueryBusInterface
 {
     public function __construct(
         private readonly Dispatcher $bus
-    ) {
-    }
+    ) {}
 
     public function ask(QueryInterface $query): mixed
     {

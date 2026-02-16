@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace Shared\Domain\ValueObject;
 
-use Ramsey\Uuid\Uuid;
 use InvalidArgumentException;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Base class for Aggregate Identifiers
  *
  * Ensures all aggregate IDs follow the same pattern and validation rules
- *
- * @package Shared\Domain\ValueObject
  */
 abstract class AggregateId
 {
     /**
-     * @param string $value UUID string
+     * @param  string  $value  UUID string
      */
     protected function __construct(
         private readonly string $value
@@ -27,9 +25,6 @@ abstract class AggregateId
 
     /**
      * Create from string value
-     *
-     * @param string $value
-     * @return static
      */
     public static function fromString(string $value): static
     {
@@ -38,8 +33,6 @@ abstract class AggregateId
 
     /**
      * Generate new unique identifier
-     *
-     * @return static
      */
     public static function generate(): static
     {
@@ -48,8 +41,6 @@ abstract class AggregateId
 
     /**
      * Get string representation
-     *
-     * @return string
      */
     public function toString(): string
     {
@@ -58,8 +49,6 @@ abstract class AggregateId
 
     /**
      * Magic method for string casting
-     *
-     * @return string
      */
     public function __toString(): string
     {
@@ -68,9 +57,6 @@ abstract class AggregateId
 
     /**
      * Check equality with another identifier
-     *
-     * @param AggregateId $other
-     * @return bool
      */
     public function equals(AggregateId $other): bool
     {
@@ -80,13 +66,11 @@ abstract class AggregateId
     /**
      * Validate UUID format
      *
-     * @param string $value
-     * @return void
      * @throws InvalidArgumentException
      */
     private function validate(string $value): void
     {
-        if (!Uuid::isValid($value)) {
+        if (! Uuid::isValid($value)) {
             throw new InvalidArgumentException(
                 sprintf('Invalid UUID format: %s', $value)
             );

@@ -9,15 +9,12 @@ namespace Shared\Application\Bus;
  *
  * Dispatches commands to their respective handlers.
  * Commands represent intentions to change system state.
- *
- * @package Shared\Application\Bus
  */
 interface CommandBusInterface
 {
     /**
      * Dispatch a command to its handler
      *
-     * @param CommandInterface $command
      * @return mixed The handler's return value
      */
     public function dispatch(CommandInterface $command): mixed;

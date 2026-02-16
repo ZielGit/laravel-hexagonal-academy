@@ -13,8 +13,6 @@ use Ramsey\Uuid\UuidInterface;
  *
  * Domain Events represent something that happened in the domain
  * that domain experts care about.
- *
- * @package Shared\Domain\Event
  */
 abstract class DomainEvent
 {
@@ -40,11 +38,6 @@ abstract class DomainEvent
 
     /**
      * Constructor
-     *
-     * @param string $aggregateId
-     * @param int $aggregateVersion
-     * @param UuidInterface|null $eventId
-     * @param DateTimeImmutable|null $occurredOn
      */
     public function __construct(
         string $aggregateId,
@@ -55,13 +48,11 @@ abstract class DomainEvent
         $this->aggregateId = $aggregateId;
         $this->aggregateVersion = $aggregateVersion;
         $this->eventId = $eventId ?? Uuid::uuid4();
-        $this->occurredOn = $occurredOn ?? new DateTimeImmutable();
+        $this->occurredOn = $occurredOn ?? new DateTimeImmutable;
     }
 
     /**
      * Get event unique identifier
-     *
-     * @return UuidInterface
      */
     public function getEventId(): UuidInterface
     {
@@ -70,8 +61,6 @@ abstract class DomainEvent
 
     /**
      * Get when the event occurred
-     *
-     * @return DateTimeImmutable
      */
     public function getOccurredOn(): DateTimeImmutable
     {
@@ -80,8 +69,6 @@ abstract class DomainEvent
 
     /**
      * Get aggregate ID that generated this event
-     *
-     * @return string
      */
     public function getAggregateId(): string
     {
@@ -90,8 +77,6 @@ abstract class DomainEvent
 
     /**
      * Get aggregate version when event was created
-     *
-     * @return int
      */
     public function getAggregateVersion(): int
     {
@@ -100,12 +85,11 @@ abstract class DomainEvent
 
     /**
      * Get event name for routing/logging
-     *
-     * @return string
      */
     public function getEventName(): string
     {
         $classParts = explode('\\', static::class);
+
         return end($classParts);
     }
 
@@ -123,8 +107,7 @@ abstract class DomainEvent
      *
      * Must be implemented by concrete events to reconstruct from storage
      *
-     * @param array<string, mixed> $data
-     * @return static
+     * @param  array<string, mixed>  $data
      */
     abstract public static function fromArray(array $data): static;
 

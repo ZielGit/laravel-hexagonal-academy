@@ -15,12 +15,11 @@ abstract class Query implements QueryInterface
 {
     /**
      * Get query name for logging/debugging
-     *
-     * @return string
      */
     public function getQueryName(): string
     {
         $classParts = explode('\\', static::class);
+
         return end($classParts);
     }
 }

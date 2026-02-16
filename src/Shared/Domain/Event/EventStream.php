@@ -14,16 +14,13 @@ use Shared\Domain\ValueObject\AggregateId;
 final class EventStream
 {
     /**
-     * @param AggregateId $aggregateId
-     * @param array<DomainEvent> $events
-     * @param int $version
+     * @param  array<DomainEvent>  $events
      */
     public function __construct(
         private readonly AggregateId $aggregateId,
         private readonly array $events,
         private readonly int $version
-    ) {
-    }
+    ) {}
 
     public function getAggregateId(): AggregateId
     {

@@ -12,8 +12,6 @@ use Shared\Domain\ValueObject\AggregateId;
  *
  * This abstract class provides the foundation for implementing
  * Event Sourced aggregates following DDD principles.
- *
- * @package Shared\Domain\Aggregate
  */
 abstract class AggregateRoot
 {
@@ -39,9 +37,6 @@ abstract class AggregateRoot
      *
      * Events are not dispatched immediately but stored to be
      * published after the aggregate is persisted.
-     *
-     * @param DomainEvent $event
-     * @return void
      */
     protected function recordThat(DomainEvent $event): void
     {
@@ -54,9 +49,6 @@ abstract class AggregateRoot
      *
      * This method is used when replaying events from the event store
      * to rebuild the aggregate's current state.
-     *
-     * @param DomainEvent $event
-     * @return void
      */
     public function apply(DomainEvent $event): void
     {
@@ -95,9 +87,7 @@ abstract class AggregateRoot
     /**
      * Reconstitute aggregate from historical events
      *
-     * @param AggregateId $aggregateId
-     * @param array<DomainEvent> $events
-     * @return static
+     * @param  array<DomainEvent>  $events
      */
     public static function reconstituteFromEvents(
         AggregateId $aggregateId,
@@ -116,8 +106,6 @@ abstract class AggregateRoot
 
     /**
      * Get the aggregate's unique identifier
-     *
-     * @return AggregateId
      */
     public function getAggregateId(): AggregateId
     {
@@ -126,8 +114,6 @@ abstract class AggregateRoot
 
     /**
      * Get current version for optimistic locking
-     *
-     * @return int
      */
     public function getAggregateVersion(): int
     {
@@ -139,22 +125,17 @@ abstract class AggregateRoot
      *
      * Convention: apply{EventClassName}
      * Example: CourseCreated -> applyCourseCreated()
-     *
-     * @param DomainEvent $event
-     * @return string
      */
     private function getApplyMethod(DomainEvent $event): string
     {
         $classParts = explode('\\', get_class($event));
         $eventName = end($classParts);
 
-        return 'apply' . $eventName;
+        return 'apply'.$eventName;
     }
 
     /**
      * Check if aggregate has uncommitted changes
-     *
-     * @return bool
      */
     public function hasUncommittedChanges(): bool
     {
@@ -163,8 +144,6 @@ abstract class AggregateRoot
 
     /**
      * Mark changes as committed
-     *
-     * @return void
      */
     public function markChangesAsCommitted(): void
     {

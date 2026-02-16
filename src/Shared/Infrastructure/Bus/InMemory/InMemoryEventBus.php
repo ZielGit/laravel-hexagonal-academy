@@ -42,9 +42,6 @@ final class InMemoryEventBus implements EventBusInterface
 
     /**
      * Check if specific event was published
-     *
-     * @param string $eventClass
-     * @return bool
      */
     public function hasPublished(string $eventClass): bool
     {
@@ -60,21 +57,18 @@ final class InMemoryEventBus implements EventBusInterface
     /**
      * Get events of specific type
      *
-     * @param string $eventClass
      * @return array<object>
      */
     public function getEventsOfType(string $eventClass): array
     {
         return array_filter(
             $this->publishedEvents,
-            fn($event) => $event instanceof $eventClass
+            fn ($event) => $event instanceof $eventClass
         );
     }
 
     /**
      * Clear all published events
-     *
-     * @return void
      */
     public function clear(): void
     {
@@ -83,8 +77,6 @@ final class InMemoryEventBus implements EventBusInterface
 
     /**
      * Get count of published events
-     *
-     * @return int
      */
     public function count(): int
     {

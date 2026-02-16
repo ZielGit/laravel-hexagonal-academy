@@ -9,6 +9,4 @@ namespace Shared\Application\Bus;
  *
  * Marker interface for all queries in the system
  */
-interface QueryInterface
-{
-}
+interface QueryInterface {}

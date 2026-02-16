@@ -15,8 +15,7 @@ final class ErrorResponse
         private readonly string $message,
         private readonly string $code = 'ERROR',
         private readonly array $errors = []
-    ) {
-    }
+    ) {}
 
     public function getMessage(): string
     {

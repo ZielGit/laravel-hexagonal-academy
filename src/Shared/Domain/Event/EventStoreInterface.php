@@ -10,18 +10,15 @@ use Shared\Domain\ValueObject\AggregateId;
  * Event Store Interface
  *
  * Repository for storing and retrieving domain events
- *
- * @package Shared\Domain\Event
  */
 interface EventStoreInterface
 {
     /**
      * Append events to the event stream
      *
-     * @param AggregateId $aggregateId
-     * @param array<DomainEvent> $events
-     * @param int $expectedVersion For optimistic concurrency control
-     * @return void
+     * @param  array<DomainEvent>  $events
+     * @param  int  $expectedVersion  For optimistic concurrency control
+     *
      * @throws ConcurrencyException if version mismatch
      */
     public function append(
@@ -33,7 +30,6 @@ interface EventStoreInterface
     /**
      * Load all events for an aggregate
      *
-     * @param AggregateId $aggregateId
      * @return array<DomainEvent>
      */
     public function load(AggregateId $aggregateId): array;
@@ -41,8 +37,6 @@ interface EventStoreInterface
     /**
      * Load events from a specific version
      *
-     * @param AggregateId $aggregateId
-     * @param int $fromVersion
      * @return array<DomainEvent>
      */
     public function loadFromVersion(
@@ -52,24 +46,17 @@ interface EventStoreInterface
 
     /**
      * Check if aggregate exists
-     *
-     * @param AggregateId $aggregateId
-     * @return bool
      */
     public function exists(AggregateId $aggregateId): bool;
 
     /**
      * Get the current version of an aggregate
-     *
-     * @param AggregateId $aggregateId
-     * @return int
      */
     public function getVersion(AggregateId $aggregateId): int;
 
     /**
      * Get all events of a specific type
      *
-     * @param string $eventType
      * @return array<DomainEvent>
      */
     public function loadByEventType(string $eventType): array;

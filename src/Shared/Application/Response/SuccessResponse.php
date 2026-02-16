@@ -14,8 +14,7 @@ final class SuccessResponse
     public function __construct(
         private readonly mixed $data = null,
         private readonly string $message = 'Operation completed successfully'
-    ) {
-    }
+    ) {}
 
     public function getData(): mixed
     {

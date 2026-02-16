@@ -12,15 +12,12 @@ use Shared\Application\Bus\CommandInterface;
  * Laravel Command Bus Implementation
  *
  * Uses Laravel's native bus for command dispatching
- *
- * @package Shared\Infrastructure\Bus
  */
 final class LaravelCommandBus implements CommandBusInterface
 {
     public function __construct(
         private readonly Dispatcher $bus
-    ) {
-    }
+    ) {}
 
     public function dispatch(CommandInterface $command): mixed
     {

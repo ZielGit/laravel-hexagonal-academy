@@ -22,8 +22,7 @@ final class StoredEvent
         public readonly array $eventData,
         public readonly DateTimeImmutable $occurredOn,
         public readonly DateTimeImmutable $recordedOn
-    ) {
-    }
+    ) {}
 
     public static function fromDomainEvent(
         object $event,
@@ -39,7 +38,7 @@ final class StoredEvent
             eventType: $reflection->getShortName(),
             eventData: $event->toArray(),
             occurredOn: $event->getOccurredOn(),
-            recordedOn: new DateTimeImmutable()
+            recordedOn: new DateTimeImmutable
         );
     }
 

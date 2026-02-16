@@ -22,7 +22,7 @@ final class Money
 
     public static function fromAmount(float $amount, string $currency = 'USD'): self
     {
-        return new self((int)($amount * 100), strtoupper($currency));
+        return new self((int) ($amount * 100), strtoupper($currency));
     }
 
     public static function fromCents(int $cents, string $currency = 'USD'): self
@@ -54,18 +54,20 @@ final class Money
     public function add(Money $other): self
     {
         $this->ensureSameCurrency($other);
+
         return new self($this->amount + $other->amount, $this->currency);
     }
 
     public function subtract(Money $other): self
     {
         $this->ensureSameCurrency($other);
+
         return new self($this->amount - $other->amount, $this->currency);
     }
 
     public function multiply(float $multiplier): self
     {
-        return new self((int)($this->amount * $multiplier), $this->currency);
+        return new self((int) ($this->amount * $multiplier), $this->currency);
     }
 
     public function isPositive(): bool

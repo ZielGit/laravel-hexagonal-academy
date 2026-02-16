@@ -28,7 +28,7 @@ final class InMemoryQueryBus implements QueryBusInterface
     {
         $queryClass = get_class($query);
 
-        if (!isset($this->handlers[$queryClass])) {
+        if (! isset($this->handlers[$queryClass])) {
             throw new \RuntimeException(
                 sprintf('No handler registered for query: %s', $queryClass)
             );

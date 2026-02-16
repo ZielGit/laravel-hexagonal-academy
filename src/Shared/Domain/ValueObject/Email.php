@@ -41,7 +41,7 @@ final class Email
 
     private function validate(string $email): void
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new InvalidArgumentException(
                 sprintf('Invalid email format: %s', $email)
             );

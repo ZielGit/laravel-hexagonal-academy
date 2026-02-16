@@ -9,6 +9,4 @@ namespace Shared\Application\Bus;
  *
  * Marker interface for all commands in the system
  */
-interface CommandInterface
-{
-}
+interface CommandInterface {}

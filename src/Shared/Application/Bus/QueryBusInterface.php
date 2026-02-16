@@ -9,15 +9,12 @@ namespace Shared\Application\Bus;
  *
  * Dispatches queries to their respective handlers.
  * Queries represent read operations that don't modify state.
- *
- * @package Shared\Application\Bus
  */
 interface QueryBusInterface
 {
     /**
      * Dispatch a query to its handler
      *
-     * @param QueryInterface $query
      * @return mixed The query result
      */
     public function ask(QueryInterface $query): mixed;

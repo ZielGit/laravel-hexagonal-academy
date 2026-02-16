@@ -15,9 +15,6 @@ interface CommandHandlerInterface
 {
     /**
      * Handle the command
-     *
-     * @param CommandInterface $command
-     * @return mixed
      */
     public function __invoke(CommandInterface $command): mixed;
 }

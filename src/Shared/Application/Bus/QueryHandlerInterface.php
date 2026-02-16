@@ -15,9 +15,6 @@ interface QueryHandlerInterface
 {
     /**
      * Handle the query
-     *
-     * @param QueryInterface $query
-     * @return mixed
      */
     public function __invoke(QueryInterface $query): mixed;
 }

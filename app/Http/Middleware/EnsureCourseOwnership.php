@@ -29,7 +29,7 @@ class EnsureCourseOwnership
             ->where('instructor_id', $userId)
             ->first();
 
-        if (!$course) {
+        if (! $course) {
             return response()->json([
                 'message' => 'Course not found or you do not have permission to access it',
             ], 403);

@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use BoundedContext\CourseCatalog\Application\UseCase\CreateCourse\CreateCourseCommand;
-use BoundedContext\CourseCatalog\Domain\ValueObject\CourseId;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Ramsey\Uuid\Uuid;
 use Shared\Application\Bus\CommandBusInterface;
@@ -13,8 +11,7 @@ class CourseCatalogSeeder extends Seeder
 {
     public function __construct(
         private readonly CommandBusInterface $commandBus
-    ) {
-    }
+    ) {}
 
     /**
      * Run the database seeds.
@@ -25,6 +22,7 @@ class CourseCatalogSeeder extends Seeder
 
         if ($instructors->isEmpty()) {
             $this->command->warn('⚠️  No instructors found. Run UserSeeder first.');
+
             return;
         }
 

@@ -1,7 +1,6 @@
 <?php
 
 use BoundedContext\CourseCatalog\Infrastructure\Http\Controller\CourseController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Health check

@@ -25,9 +25,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('module_id')
-                  ->references('module_id')
-                  ->on('modules')
-                  ->onDelete('cascade');
+                ->references('module_id')
+                ->on('modules')
+                ->onDelete('cascade');
 
             // Ensure unique order within a module
             $table->unique(['module_id', 'order']);

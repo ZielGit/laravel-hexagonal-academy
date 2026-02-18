@@ -22,9 +22,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('course_id')
-                  ->references('course_id')
-                  ->on('courses')
-                  ->onDelete('cascade');
+                ->references('course_id')
+                ->on('courses')
+                ->onDelete('cascade');
 
             // Ensure unique order within a course
             $table->unique(['course_id', 'order']);

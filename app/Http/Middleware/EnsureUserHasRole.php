@@ -15,9 +15,9 @@ class EnsureUserHasRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!$request->user() || $request->user()->role !== $role) {
+        if (! $request->user() || $request->user()->role !== $role) {
             return response()->json([
-                'message' => 'Unauthorized. Required role: ' . $role,
+                'message' => 'Unauthorized. Required role: '.$role,
             ], 403);
         }
 

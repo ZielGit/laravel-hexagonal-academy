@@ -19,8 +19,8 @@ return new class extends Migration
             $table->char('currency', 3)->default('USD');
             $table->enum('level', ['beginner', 'intermediate', 'advanced', 'expert']);
             $table->enum('status', ['draft', 'published', 'archived', 'suspended'])
-                  ->default('draft')
-                  ->index();
+                ->default('draft')
+                ->index();
             $table->uuid('instructor_id')->index();
             $table->unsignedSmallInteger('total_modules')->default(0);
             $table->unsignedSmallInteger('total_lessons')->default(0);

@@ -51,7 +51,7 @@ FROM base AS development
 
 # Install Xdebug for debugging
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
-    && pecl install xdebug-3.2.2 \
+    && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && apk del .build-deps
 

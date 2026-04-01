@@ -162,6 +162,7 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@hexagonal-academy.test}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_ALLOW_SPECIAL_EMAIL_DOMAINS: '["test", "localhost", "local"]'
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     networks:

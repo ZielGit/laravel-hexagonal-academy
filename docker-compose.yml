@@ -88,7 +88,7 @@ services:
       - redis_data:/data
     networks:
       - hexagonal_network
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-null}
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis}
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s

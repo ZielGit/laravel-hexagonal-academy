@@ -70,7 +70,7 @@ final class CourseController extends Controller
             price: (float) $request->input('price', 0),
             currency: $request->input('currency', 'USD'),
             level: $request->input('level'),
-            instructorId: $request->user()->id,
+            instructorId: $request->user()->uuid,
         );
 
         $response = $this->commandBus->dispatch($command);
@@ -145,7 +145,7 @@ final class CourseController extends Controller
     {
         $command = new PublishCourseCommand(
             courseId: $courseId,
-            instructorId: $request->user()->id,
+            instructorId: $request->user()->uuid,
         );
 
         $this->commandBus->dispatch($command);
@@ -163,7 +163,7 @@ final class CourseController extends Controller
     public function myCoures(Request $request): ResourceCollection
     {
         $courses = CourseReadModel::query()
-            ->byInstructor($request->user()->id)
+            ->byInstructor($request->user()->uuid)
             ->withTrashed()
             ->orderByDesc('created_at')
             ->paginate($request->input('per_page', 15));

@@ -23,10 +23,10 @@ class EnsureCourseOwnership
     public function handle(Request $request, Closure $next): Response
     {
         $courseId = $request->route('courseId');
-        $userId = $request->user()->id;
+        $instructorUuid = $request->user()->uuid;
 
         $course = CourseReadModel::where('course_id', $courseId)
-            ->where('instructor_id', $userId)
+            ->where('instructor_id', $instructorUuid)
             ->first();
 
         if (! $course) {

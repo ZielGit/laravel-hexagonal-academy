@@ -39,7 +39,7 @@ class CourseCatalogSeeder extends Seeder
                 price: $courseData['price'],
                 currency: 'USD',
                 level: $courseData['level'],
-                instructorId: $instructor->id,
+                instructorId: $instructor->uuid,
             );
 
             try {

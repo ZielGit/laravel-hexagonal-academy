@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace BoundedContext\CourseCatalog\Infrastructure\Persistence\Eloquent;
 
+use Database\Factories\CourseReadModelFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -18,6 +20,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 final class CourseReadModel extends Model
 {
+    /** @use HasFactory<CourseReadModelFactory> */
+    use HasFactory;
+
     use SoftDeletes;
 
     protected $table = 'courses';
@@ -27,6 +32,11 @@ final class CourseReadModel extends Model
     public $incrementing = false;
 
     protected $keyType = 'string';
+
+    protected static function newFactory(): CourseReadModelFactory
+    {
+        return CourseReadModelFactory::new();
+    }
 
     protected $fillable = [
         'course_id',

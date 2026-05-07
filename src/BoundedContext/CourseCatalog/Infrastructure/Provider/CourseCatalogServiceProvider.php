@@ -7,6 +7,8 @@ namespace BoundedContext\CourseCatalog\Infrastructure\Provider;
 use BoundedContext\CourseCatalog\Application\Projection\CourseProjectorInterface;
 use BoundedContext\CourseCatalog\Application\UseCase\CreateCourse\CreateCourseCommand;
 use BoundedContext\CourseCatalog\Application\UseCase\CreateCourse\CreateCourseHandler;
+use BoundedContext\CourseCatalog\Application\UseCase\PublishCourse\PublishCourseCommand;
+use BoundedContext\CourseCatalog\Application\UseCase\PublishCourse\PublishCourseHandler;
 use BoundedContext\CourseCatalog\Domain\Repository\CourseRepositoryInterface;
 use BoundedContext\CourseCatalog\Infrastructure\Persistence\Eloquent\EloquentCourseRepository;
 use BoundedContext\CourseCatalog\Infrastructure\Persistence\Projection\EloquentCourseProjector;
@@ -34,6 +36,11 @@ final class CourseCatalogServiceProvider extends ServiceProvider
         $this->registerProjectors();
         $this->app->bind(CreateCourseHandler::class, function ($app) {
             return new CreateCourseHandler(
+                $app->make(CourseRepositoryInterface::class)
+            );
+        });
+        $this->app->bind(PublishCourseHandler::class, function ($app) {
+            return new PublishCourseHandler(
                 $app->make(CourseRepositoryInterface::class)
             );
         });
@@ -77,8 +84,8 @@ final class CourseCatalogServiceProvider extends ServiceProvider
     {
         Bus::map([
             CreateCourseCommand::class => CreateCourseHandler::class,
+            PublishCourseCommand::class => PublishCourseHandler::class,
             // TODO: Add more command handlers
-            // PublishCourseCommand::class => PublishCourseHandler::class,
             // UpdateCourseCommand::class => UpdateCourseHandler::class,
         ]);
     }
@@ -125,6 +132,7 @@ final class CourseCatalogServiceProvider extends ServiceProvider
             CourseRepositoryInterface::class,
             CourseProjectorInterface::class,
             CreateCourseHandler::class,
+            PublishCourseHandler::class,
         ];
     }
 }

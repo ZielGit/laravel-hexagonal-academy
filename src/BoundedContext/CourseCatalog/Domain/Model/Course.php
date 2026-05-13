@@ -72,10 +72,11 @@ final class Course extends AggregateRoot
     private array $modules = [];
 
     // ============================================
-    // CONSTRUCTOR - Private for Event Sourcing
+    // CONSTRUCTOR — public so AggregateRoot::reconstituteFromEvents can `new static`.
+    // Instantiate new courses only via Course::create().
     // ============================================
 
-    private function __construct(CourseId $courseId)
+    public function __construct(CourseId $courseId)
     {
         $this->aggregateId = $courseId;
         $this->duration = CourseDuration::fromMinutes(0);

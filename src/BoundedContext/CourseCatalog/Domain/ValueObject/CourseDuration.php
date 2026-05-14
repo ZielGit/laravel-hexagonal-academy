@@ -57,7 +57,8 @@ final class CourseDuration
 
     private function validate(): void
     {
-        if ($this->minutes < self::MIN_DURATION) {
+        // Zero = draft course with no lesson content yet (read model also starts at 0).
+        if ($this->minutes !== 0 && $this->minutes < self::MIN_DURATION) {
             throw new InvalidArgumentException(
                 sprintf('Course duration must be at least %d minutes', self::MIN_DURATION)
             );

@@ -37,11 +37,12 @@ abstract class AggregateRoot
      *
      * Events are not dispatched immediately but stored to be
      * published after the aggregate is persisted.
+     * State is updated immediately via the same apply path used when replaying history.
      */
     protected function recordThat(DomainEvent $event): void
     {
         $this->recordedEvents[] = $event;
-        $this->aggregateVersion++;
+        $this->apply($event);
     }
 
     /**

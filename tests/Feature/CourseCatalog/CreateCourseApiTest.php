@@ -50,7 +50,7 @@ class CreateCourseApiTest extends TestCase
 
         $this->assertDatabaseHas('courses', [
             'title' => 'Advanced Laravel Testing',
-            'instructor_id' => $instructor->id,
+            'instructor_id' => $instructor->uuid,
             'status' => 'draft',
         ]);
     }

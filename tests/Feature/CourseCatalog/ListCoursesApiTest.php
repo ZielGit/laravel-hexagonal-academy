@@ -24,19 +24,19 @@ class ListCoursesApiTest extends TestCase
         CourseReadModel::factory()->create([
             'title' => 'Published Course 1',
             'status' => 'published',
-            'instructor_id' => $instructor->id,
+            'instructor_id' => $instructor->uuid,
         ]);
 
         CourseReadModel::factory()->create([
             'title' => 'Published Course 2',
             'status' => 'published',
-            'instructor_id' => $instructor->id,
+            'instructor_id' => $instructor->uuid,
         ]);
 
         CourseReadModel::factory()->create([
             'title' => 'Draft Course',
             'status' => 'draft',
-            'instructor_id' => $instructor->id,
+            'instructor_id' => $instructor->uuid,
         ]);
 
         // Act
@@ -60,14 +60,14 @@ class ListCoursesApiTest extends TestCase
             'title' => 'Beginner Course',
             'status' => 'published',
             'level' => 'beginner',
-            'instructor_id' => $instructor->id,
+            'instructor_id' => $instructor->uuid,
         ]);
 
         CourseReadModel::factory()->create([
             'title' => 'Advanced Course',
             'status' => 'published',
             'level' => 'advanced',
-            'instructor_id' => $instructor->id,
+            'instructor_id' => $instructor->uuid,
         ]);
 
         // Act
@@ -88,7 +88,7 @@ class ListCoursesApiTest extends TestCase
 
         CourseReadModel::factory(20)->create([
             'status' => 'published',
-            'instructor_id' => $instructor->id,
+            'instructor_id' => $instructor->uuid,
         ]);
 
         // Act
@@ -120,7 +120,7 @@ class ListCoursesApiTest extends TestCase
             'total_modules' => 5,
             'total_lessons' => 25,
             'duration_minutes' => 300,
-            'instructor_id' => $instructor->id,
+            'instructor_id' => $instructor->uuid,
         ]);
 
         // Act

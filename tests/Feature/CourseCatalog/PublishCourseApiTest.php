@@ -28,7 +28,7 @@ class PublishCourseApiTest extends TestCase
     {
         // Arrange
         $instructor = User::factory()->instructor()->create();
-        $courseId = $this->createCourseWithContent($instructor->id);
+        $courseId = $this->createCourseWithContent($instructor->uuid);
 
         // Act
         $response = $this->actingAs($instructor, 'sanctum')
@@ -53,7 +53,7 @@ class PublishCourseApiTest extends TestCase
     {
         // Arrange
         $instructor = User::factory()->instructor()->create();
-        $courseId = $this->createCourseWithoutContent($instructor->id);
+        $courseId = $this->createCourseWithoutContent($instructor->uuid);
 
         // Act
         $response = $this->actingAs($instructor, 'sanctum')
@@ -69,7 +69,7 @@ class PublishCourseApiTest extends TestCase
         // Arrange
         $instructor1 = User::factory()->instructor()->create();
         $instructor2 = User::factory()->instructor()->create();
-        $courseId = $this->createCourseWithContent($instructor1->id);
+        $courseId = $this->createCourseWithContent($instructor1->uuid);
 
         // Act
         $response = $this->actingAs($instructor2, 'sanctum')

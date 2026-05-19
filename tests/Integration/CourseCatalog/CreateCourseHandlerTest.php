@@ -40,7 +40,7 @@ final class CreateCourseHandlerTest extends TestCase
     {
         // Arrange
         $courseId = CourseId::generate()->toString();
-        $instructorId = $this->createInstructor()->id;
+        $instructorId = $this->createInstructor()->uuid;
 
         $command = new CreateCourseCommand(
             courseId: $courseId,
@@ -71,7 +71,7 @@ final class CreateCourseHandlerTest extends TestCase
     {
         // Arrange
         $courseId = CourseId::generate()->toString();
-        $instructorId = $this->createInstructor()->id;
+        $instructorId = $this->createInstructor()->uuid;
 
         $command = new CreateCourseCommand(
             courseId: $courseId,
@@ -99,7 +99,7 @@ final class CreateCourseHandlerTest extends TestCase
     {
         // Arrange
         $courseId = CourseId::generate()->toString();
-        $instructorId = $this->createInstructor()->id;
+        $instructorId = $this->createInstructor()->uuid;
 
         $command = new CreateCourseCommand(
             courseId: $courseId,
@@ -135,7 +135,7 @@ final class CreateCourseHandlerTest extends TestCase
             price: 99.99,
             currency: 'USD',
             level: 'beginner',
-            instructorId: $this->createInstructor()->id,
+            instructorId: $this->createInstructor()->uuid,
         );
 
         // Assert

@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace BoundedContext\CourseCatalog\Infrastructure\Http\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Attributes as OA;
 
 /**
  * Create Course Form Request
  *
  * Validates HTTP input before reaching the Controller.
- *
- * @OA\Schema(
- *     schema="CreateCourseRequest",
- *     required={"title","description","level"},
- *
- *     @OA\Property(property="title", type="string", minLength=5, maxLength=200),
- *     @OA\Property(property="description", type="string", minLength=20),
- *     @OA\Property(property="price", type="number", format="float"),
- *     @OA\Property(property="currency", type="string", example="USD"),
- *     @OA\Property(property="level", type="string", enum={"beginner","intermediate","advanced","expert"}),
- * )
  */
+#[OA\Schema(
+    schema: "CreateCourseRequest",
+    required: ["title","description","level"],
+    properties: [
+        new OA\Property(property: "title", type: "string", minLength: 5, maxLength: 200),
+        new OA\Property(property: "description", type: "string", minLength: 20),
+        new OA\Property(property: "price", type: "number", format: "float"),
+        new OA\Property(property: "currency", type: "string", example: "USD"),
+        new OA\Property(property: "level", type: "string", enum: ["beginner","intermediate","advanced","expert"])
+    ]
+)]
 final class CreateCourseRequest extends FormRequest
 {
     public function authorize(): bool

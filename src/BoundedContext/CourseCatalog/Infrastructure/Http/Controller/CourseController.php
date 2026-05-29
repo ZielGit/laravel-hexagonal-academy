@@ -15,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;
+use OpenApi\Attributes as OA;
 use Ramsey\Uuid\Uuid;
 use Shared\Application\Bus\CommandBusInterface;
 use Shared\Application\Bus\QueryBusInterface;
@@ -34,6 +35,26 @@ use Shared\Application\Bus\QueryBusInterface;
  * - Business logic (that's the Domain's job)
  * - Data access (that's the Repository's job)
  */
+#[OA\Info(
+    version: "1.0.0",
+    title: "Laravel Hexagonal Academy API",
+    description: "API description",
+    contact: new OA\Contact(
+        email: "contact@example.com"
+    ),
+    license: new OA\License(
+        name: "Apache 2.0",
+        url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+    )
+)]
+#[OA\Server(
+    url: "http://localhost:8000",
+    description: "Local development server"
+)]
+#[OA\Server(
+    url: "https://api.example.com",
+    description: "Production server"
+)]
 final class CourseController extends Controller
 {
     public function __construct(
@@ -41,26 +62,30 @@ final class CourseController extends Controller
         private readonly QueryBusInterface $queryBus
     ) {}
 
-    /**
-     * POST /api/v1/courses
-     *
-     * @OA\Post(
-     *     path="/api/v1/courses",
-     *     summary="Create a new course",
-     *     tags={"Courses"},
-     *     security={{"bearerAuth":{}}},
-     *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/CreateCourseRequest")
-     *     ),
-     *
-     *     @OA\Response(response=201, description="Course created successfully"),
-     *     @OA\Response(response=422, description="Validation error"),
-     *     @OA\Response(response=401, description="Unauthorized")
-     * )
-     */
+    #[OA\Post(
+        path: "/api/v1/courses",
+        summary: "Create a new course",
+        tags: ["Courses"],
+        security: [["bearerAuth" => []]],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(ref: "#/components/schemas/CreateCourseRequest")
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: "Course created successfully"
+            ),
+            new OA\Response(
+                response: 422,
+                description: "Validation error"
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Unauthorized"
+            )
+        ]
+    )]
     public function create(CreateCourseRequest $request): JsonResponse
     {
         $command = new CreateCourseCommand(
@@ -81,20 +106,29 @@ final class CourseController extends Controller
         ], 201);
     }
 
-    /**
-     * GET /api/v1/courses
-     *
-     * @OA\Get(
-     *     path="/api/v1/courses",
-     *     summary="List all published courses",
-     *     tags={"Courses"},
-     *
-     *     @OA\Parameter(name="level", in="query", required=false),
-     *     @OA\Parameter(name="per_page", in="query", required=false),
-     *
-     *     @OA\Response(response=200, description="List of courses")
-     * )
-     */
+    #[OA\Get(
+        path: "/api/v1/courses",
+        summary: "List all published courses",
+        tags: ["Courses"],
+        parameters: [
+            new OA\Parameter(
+                name: "level",
+                in: "query",
+                required: false,
+            ),
+            new OA\Parameter(
+                name: "per_page",
+                in: "query",
+                required: false
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "List of courses"
+            )
+        ]
+    )]
     public function index(Request $request): ResourceCollection
     {
         $courses = CourseReadModel::query()
@@ -113,20 +147,28 @@ final class CourseController extends Controller
         return CourseCollection::make($courses);
     }
 
-    /**
-     * GET /api/v1/courses/{courseId}
-     *
-     * @OA\Get(
-     *     path="/api/v1/courses/{courseId}",
-     *     summary="Get a course by ID",
-     *     tags={"Courses"},
-     *
-     *     @OA\Parameter(name="courseId", in="path", required=true),
-     *
-     *     @OA\Response(response=200, description="Course details"),
-     *     @OA\Response(response=404, description="Course not found")
-     * )
-     */
+    #[OA\Get(
+        path: "/api/v1/courses/{courseId}",
+        summary: "Get a course by ID",
+        tags: ["Courses"],
+        parameters: [
+            new OA\Parameter(
+                name: "courseId",
+                in: "path",
+                required: true,
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Course details"
+            ),
+            new OA\Response(
+                response: 404,
+                description: "Course not found"
+            )
+        ]
+    )]
     public function show(string $courseId): JsonResponse
     {
         $course = CourseReadModel::with(['modules', 'lessons'])

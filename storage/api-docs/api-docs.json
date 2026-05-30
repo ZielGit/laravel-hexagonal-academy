@@ -1,0 +1,157 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel Hexagonal Academy API",
+        "description": "API description",
+        "contact": {
+            "email": "contact@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Local development server"
+        },
+        {
+            "url": "https://api.example.com",
+            "description": "Production server"
+        }
+    ],
+    "paths": {
+        "/api/v1/courses": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "List all published courses",
+                "operationId": "25dee3137a69402a187dcb0d857313b2",
+                "parameters": [
+                    {
+                        "name": "level",
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of courses"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Create a new course",
+                "operationId": "744e2b419aeb62539249f59dec264615",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCourseRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Course created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/courses/{courseId}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get a course by ID",
+                "operationId": "381b4a2a0acac38cf8f6c0d8964d9f05",
+                "parameters": [
+                    {
+                        "name": "courseId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course details"
+                    },
+                    "404": {
+                        "description": "Course not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateCourseRequest": {
+                "required": [
+                    "title",
+                    "description",
+                    "level"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "Create Course Form Request\n\nValidates HTTP input before reaching the Controller.",
+                        "type": "string",
+                        "maxLength": 200,
+                        "minLength": 5
+                    },
+                    "description": {
+                        "type": "string",
+                        "minLength": 20
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "currency": {
+                        "type": "string",
+                        "example": "USD"
+                    },
+                    "level": {
+                        "type": "string",
+                        "enum": [
+                            "beginner",
+                            "intermediate",
+                            "advanced",
+                            "expert"
+                        ]
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Courses",
+            "description": "Courses"
+        }
+    ]
+}
